@@ -1,0 +1,650 @@
+/* ===== BASE STYLES ===== */
+body {
+  font-family: 'Rajdhani', sans-serif;
+  background-color: #0d0221;
+  color: white;
+  margin: 0;
+  padding: 20px;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(255, 42, 109, 0.1) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(5, 217, 232, 0.1) 0%, transparent 20%);
+}
+
+h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
+  background: linear-gradient(90deg, #ff2a6d, #05d9e8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 30px 0;
+}
+
+/* ===== CHECKBOXES WITH SVG TICK ===== */
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #05d9e8;
+  border-radius: 4px;
+  background: rgba(26, 26, 46, 0.5);
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+  margin-right: 10px;
+  transition: all 0.3s ease;
+}
+
+input[type="checkbox"]:checked {
+  background: #ff2a6d;
+  border-color: #ff2a6d;
+  box-shadow: 0 0 15px rgba(255, 42, 109, 0.5);
+}
+
+/* Custom SVG Tick Mark */
+input[type="checkbox"]:checked::after {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E");
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ===== EXERCISE SECTIONS ===== */
+.exercise-section {
+  background: rgba(26, 26, 46, 0.7);
+  border: 1px solid rgba(255, 42, 109, 0.3);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 25px 0;
+  box-shadow: 0 0 20px rgba(5, 217, 232, 0.1);
+}
+
+.exercise-section h2 {
+  color: #05d9e8;
+  border-bottom: 2px solid #ff2a6d;
+  padding-bottom: 10px;
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* ===== EXERCISE ITEMS ===== */
+.exercise-item {
+  margin: 20px 0;
+  padding: 15px;
+  background: rgba(13, 2, 33, 0.5);
+  border-left: 3px solid #05d9e8;
+  transition: all 0.3s ease;
+}
+
+.exercise-item:hover {
+  border-left: 3px solid #ff2a6d;
+  transform: translateX(5px);
+}
+
+/* ===== VIDEOS ===== */
+.exercise-videos {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.exercise-videos video {
+  width: 45%;
+  border: 1px solid rgba(5, 217, 232, 0.5);
+  border-radius: 6px;
+  box-shadow: 0 0 15px rgba(5, 217, 232, 0.2);
+  transition: all 0.3s ease;
+}
+
+.exercise-videos video:hover {
+  transform: scale(1.02);
+  border-color: #ff2a6d;
+  box-shadow: 0 0 25px rgba(255, 42, 109, 0.4);
+}
+
+/* ===== BUTTON ===== */
+#submit {
+  display: block;
+  margin: 40px auto;
+  padding: 15px 40px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
+  background: linear-gradient(90deg, #ff2a6d, #05d9e8);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 0 20px rgba(5, 217, 232, 0.3);
+  transition: all 0.3s ease;
+}
+
+#submit:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 30px rgba(255, 42, 109, 0.5);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .exercise-videos {
+    flex-direction: column;
+  }
+  .exercise-videos video {
+    width: 100%;
+  }
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: margin-left 0.3s;
+}
+
+.toggle-btn {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-size: 26px;
+    background-color: #111;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 1100;
+}
+
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    background-color: #111;
+    padding-top: 20px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+}
+
+.sidebar h2 {
+    color: white;
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.sidebar a {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white;
+    display: block;
+    transition: 0.2s;
+}
+
+.sidebar a:hover {
+    background-color: #575757;
+}
+
+.content {
+    padding: 20px;
+}
+
+body.sidebar-open {
+    overflow-x: hidden;
+}
+
+form input, form select {
+    display: block;
+    margin-bottom: 10px;
+    padding: 8px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.workout iframe {
+    margin-top: 10px;
+    max-width: 100%;
+}
+/* 🏋️ Cyberpunk Workout Dashboard */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap');
+
+body {
+  font-family: 'Rajdhani', sans-serif;
+  background-color: #0d0221;
+  color: #d1f7ff;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(255, 42, 109, 0.1) 0%, transparent 25%),
+    radial-gradient(circle at 90% 80%, rgba(5, 217, 232, 0.1) 0%, transparent 25%),
+    linear-gradient(to bottom, #0d0221, #0a0118);
+  background-attachment: fixed;
+}
+
+.main-content {
+  padding: 30px;
+  margin-left: 280px;
+  transition: margin-left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.sidebar.collapsed + .main-content {
+  margin-left: 80px;
+}
+
+h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
+  background: linear-gradient(90deg, #ff2a6d, #05d9e8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 30px 0 50px;
+  position: relative;
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, #ff2a6d, #05d9e8);
+  border-radius: 3px;
+}
+
+/* 🏆 Workout Sections */
+.workout-section {
+  background: rgba(13, 2, 33, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(5, 217, 232, 0.3);
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 40px;
+  box-shadow: 0 10px 30px rgba(5, 217, 232, 0.1);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.workout-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to bottom, #ff2a6d, #05d9e8);
+}
+
+.workout-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(255, 42, 109, 0.2);
+}
+
+.section-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  color: #05d9e8;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 2px;
+  background: #ff2a6d;
+}
+
+.muscle-group {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  color: #ff2a6d;
+  margin: 30px 0 20px;
+  padding-left: 15px;
+  border-left: 3px solid #05d9e8;
+}
+
+/* 💪 Exercise Cards - Holographic Style */
+.exercise-card {
+  background: rgba(26, 26, 46, 0.5);
+  border: 1px solid rgba(5, 217, 232, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 25px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.exercise-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(255, 42, 109, 0.3);
+  border-color: rgba(255, 42, 109, 0.4);
+}
+
+.exercise-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(255, 42, 109, 0.05) 50%,
+    rgba(5, 217, 232, 0.05) 100%
+  );
+  pointer-events: none;
+}
+
+.exercise-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.exercise-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.4rem;
+  color: #fff;
+  margin: 0;
+  flex: 1;
+  min-width: 200px;
+}
+
+.exercise-sets {
+  font-size: 1rem;
+  color: #05d9e8;
+  margin: 5px 0;
+  font-weight: 500;
+}
+
+/* 🔘 Add to Routine Checkbox */
+.add-to-routine {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  z-index: 2;
+}
+
+.add-to-routine input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #05d9e8;
+  border-radius: 5px;
+  background: rgba(13, 2, 33, 0.7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.add-to-routine input[type="checkbox"]:checked {
+  background: #ff2a6d;
+  border-color: #ff2a6d;
+  box-shadow: 0 0 15px rgba(255, 42, 109, 0.5);
+}
+
+.add-to-routine input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  color: white;
+  font-size: 14px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.add-to-routine label {
+  color: #d1f7ff;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.add-to-routine:hover label {
+  color: #fff;
+}
+
+/* 🎥 Exercise Videos Grid */
+.exercise-videos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.exercise-videos video {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(5, 217, 232, 0.3);
+  box-shadow: 0 5px 15px rgba(5, 217, 232, 0.2);
+  transition: all 0.3s ease;
+}
+
+.exercise-videos video:hover {
+  transform: scale(1.02);
+  border-color: #ff2a6d;
+  box-shadow: 0 8px 25px rgba(255, 42, 109, 0.4);
+}
+
+/* 🚀 Submit Button - Cyberpunk Style */
+.submit-section {
+  text-align: center;
+  margin: 50px 0;
+}
+
+.submit-btn {
+  background: linear-gradient(90deg, #ff2a6d, #05d9e8);
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 5px 20px rgba(5, 217, 232, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 42, 109, 0.5);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+.submit-btn i {
+  margin-right: 10px;
+}
+
+.submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: all 0.5s ease;
+}
+
+.submit-btn:hover::before {
+  left: 100%;
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 992px) {
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+  
+  .exercise-videos {
+    grid-template-columns: 1fr;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    margin: 20px 0 30px;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .muscle-group {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .exercise-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .exercise-name {
+    margin-bottom: 10px;
+  }
+  
+  .submit-btn {
+    padding: 12px 30px;
+    font-size: 1rem;
+  }
+}
+/* 🏋️ Cyberpunk Fitness Tracker with Background Image */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap');
+
+body {
+  font-family: 'Rajdhani', sans-serif;
+  color: #d1f7ff;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: 
+    /* Dark overlay for better text contrast */
+    linear-gradient(rgba(13, 2, 33, 0.85), rgba(13, 2, 33, 0.85)),
+    /* Background image */
+    url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') 
+    center/cover no-repeat fixed;
+  
+  /* Cyberpunk glow effects */
+  box-shadow: inset 0 0 100px rgba(5, 217, 232, 0.1);
+  position: relative;
+}
+
+/* Add a subtle animated grid overlay */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(255, 42, 109, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 42, 109, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.main-content {
+  padding: 30px;
+  margin-left: 280px;
+  transition: margin-left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Welcome message styling */
+#welcome {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  text-align: center;
+  margin: 40px 0;
+  background: linear-gradient(90deg, #ff2a6d, #05d9e8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 20px rgba(5, 217, 232, 0.3);
+  line-height: 1.3;
+}
+
+/* Rest of your existing Fitness.css styles remain the same */
+.workout-section {
+  background: rgba(13, 2, 33, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(5, 217, 232, 0.3);
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 40px;
+  box-shadow: 0 10px 30px rgba(5, 217, 232, 0.1);
+}
+
+.section-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  color: #05d9e8;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+}
+
+.exercise-card {
+  background: rgba(26, 26, 46, 0.5);
+  border: 1px solid rgba(5, 217, 232, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+/* ... (keep all other existing styles) ... */
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #welcome {
+    font-size: 1.8rem;
+    margin: 30px 0;
+  }
+  
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+}

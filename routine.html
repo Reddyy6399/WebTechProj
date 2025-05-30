@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fitness Tracker - My Routine</title>
+    <link rel="stylesheet" href="routine.css">
+    <link rel="stylesheet" href="SideBar.css">
+    <link rel="stylesheet" href="calender.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
+        // Global variables for calendar
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+
+        function initializeCalendar() {
+            updateMonthYearDisplay();
+            renderCalendar();
+        }
+
+        function updateMonthYearDisplay() {
+            document.getElementById('currentMonthYear').textContent =
+                new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long', year: 'numeric' });
+        }
+
+        function renderCalendar() {
+            const calendarDays = document.getElementById('calendarDays');
+            calendarDays.innerHTML = '';
+
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+            const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            dayNames.forEach(day => {
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'calendar-day-header';
+                dayHeader.textContent = day;
+                calendarDays.appendChild(dayHeader);
+            });
+
+            for (let i = 0; i < firstDay; i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'calendar-day empty';
+                calendarDays.appendChild(emptyDay);
+            }
+
+            const today = new Date();
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+
+                if (day === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear()) {
+                    dayElement.classList.add('today');
+                }
+
+                const dayNumber = document.createElement('div');
+                dayNumber.className = 'calendar-day-number';
+                dayNumber.textContent = day;
+                dayElement.appendChild(dayNumber);
+
+                const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const exerciseIDS = [
+                    "pushup", "butterflypecdec", "dumbellincline", "legraises",
+                    "russian", "handplank", "boxdips", "bicepcurls", "bandpushup",
+                    "lateralraise", "chinups", "bayesian", "pullups", "barpullover",
+                    "dumbellrow", "barbellsquat", "machineleg", "gluteham",
+                    "calvestretch", "calveraises", "machinecalve", "hipthrust",
+                    "deadlifts", "gobletsquat"
+                ];
+
+                let workoutCount = 0;
+                exerciseIDS.forEach(id => {
+                    const completed = localStorage.getItem(`completed-${id}-${dateStr}`) === 'true';
+                    if (completed) {
+                        workoutCount++;
+                    }
+                });
+
+                if (workoutCount > 0) {
+                    const workoutElement = document.createElement('span');
+                    workoutElement.className = 'calendar-workout completed';
+                    workoutElement.textContent = `${workoutCount} ${workoutCount === 1 ? 'Workout' : 'Workouts'}`;
+                    dayElement.appendChild(workoutElement);
+                }
+
+                calendarDays.appendChild(dayElement);
+            }
+        }
+
+        function updateCalendar() {
+            renderCalendar();
+        }
+
+        function changeMonth(offset) {
+            currentMonth += offset;
+
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            } else if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+
+            updateMonthYearDisplay();
+            renderCalendar();
+        }
+
+        window.onload = () => {
+            // Existing logic for routine loading and calendar initialization
+            const routineList = document.getElementById('routineList');
+            const exerciseIDS = [
+                "pushup", "butterflypecdec", "dumbellincline", "legraises",
+                "russian", "handplank", "boxdips", "bicepcurls", "bandpushup",
+                "lateralraise", "chinups", "bayesian", "pullups", "barpullover",
+                "dumbellrow",
+                "barbellsquat", "machineleg", "gluteham", "calvestretch",
+                "calveraises", "machinecalve", "hipthrust", "deadlifts",
+                "gobletsquat",
+            ];
+
+            const contentMap = {
+                pushup: "Push-Up",
+                butterflypecdec: "Butterfly Pec Dec",
+                dumbellincline: "Incline Dumbbell Press",
+                legraises: "Leg Raises",
+                russian: "Russian Twists",
+                handplank: "Hand Plank",
+                boxdips: "Box Dips",
+                bicepcurls: "Bicep Curls",
+                bandpushup: "Resistance Band Push-Up",
+                lateralraise: "Lateral Raise",
+                chinups: "Chin-Ups",
+                bayesian: "Bayesian Curl",
+                pullups: "Pull-Ups",
+                barpullover: "Bar Pullover",
+                dumbellrow: "Dumbbell Row",
+                barbellsquat: "Barbell Squat",
+                machineleg: "Leg Press Machine",
+                gluteham: "Glute Ham Raise",
+                calvestretch: "Calf Stretch",
+                calveraises: "Calf Raises",
+                machinecalve: "Calf Raise Machine",
+                hipthrust: "Hip Thrust",
+                deadlifts: "Deadlifts",
+                gobletsquat: "Goblet Squat"
+            };
+
+            exerciseIDS.forEach((id) => {
+                const isChecked = localStorage.getItem(id) === 'true';
+                if (isChecked) {
+                    const item = document.createElement("li");
+                    item.textContent = contentMap[id];
+
+                    // Add completion checkbox
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.id = `complete-${id}`;
+                    checkbox.addEventListener('change', function () {
+                        const today = new Date().toISOString().slice(0, 10);
+                        localStorage.setItem(`completed-${id}-${today}`, this.checked);
+                        updateCalendar();
+                    });
+
+                    item.prepend(checkbox);
+                    item.prepend(document.createElement("br"));
+                    routineList.appendChild(item);
+                }
+            });
+
+            initializeCalendar();
+
+            // Collapse button functionality
+            const sidebar = document.querySelector('.sidebar');
+            const collapseBtn = document.querySelector('.collapse-btn');
+            const collapseIcon = collapseBtn.querySelector('i');
+
+            // Load saved state
+            const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+            if (isCollapsed) {
+                sidebar.classList.add('collapsed');
+                collapseIcon.classList.remove('fa-chevron-left');
+                collapseIcon.classList.add('fa-chevron-right');
+            }
+
+            collapseBtn.addEventListener('click', function () {
+                sidebar.classList.toggle('collapsed');
+                collapseIcon.classList.toggle('fa-chevron-left');
+                collapseIcon.classList.toggle('fa-chevron-right');
+                localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
+            });
+
+            // Mobile sidebar toggle
+            document.querySelector('.sidebar-toggle')?.addEventListener('click', () => {
+                document.querySelector('.sidebar').classList.toggle('active');
+            });
+        };
+    </script>
+</head>
+
+<body class="routine-page">
+    <div class="sidebar">
+        <div class="collapse-btn">
+            <i class="fas fa-chevron-left"></i>
+        </div>
+
+        <div class="sidebar-title">
+            <div class="sidebar-title">Fitness Tracker</div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li>
+                <a href="fitness.html"> <i class="fas fa-dumbbell"></i>
+                    <span>Workouts</span>
+                </a>
+            </li>
+            <li>
+                <a href="routine.html" class="active"> <i class="fas fa-list-check"></i>
+                    <span>My Routine</span>
+                </a>
+            </li>
+            <li>
+                <a href="progress.html">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Progress</span>
+                    <div class="status-indicator"></div>
+                </a>
+            </li>
+            <li>
+                <a href="profile.html">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                    <div class="status-indicator active"></div>
+                </a>
+            </li>
+            <li>
+                <a href="loginpage.html">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                    <div class="status-indicator"></div>
+                </a>
+            </li>
+        </ul>
+
+        <div class="sidebar-footer">
+            © 2025 Fitness Tracker
+        </div>
+    </div>
+
+    <div class="main-content">
+        <h1>Your Fitness Dashboard</h1>
+
+        <!-- Calendar container -->
+        <div class="calendar-container" style="margin: 20px auto; max-width: 900px;">
+            <div class="calendar-header">
+                <h2 class="calendar-title" id="currentMonthYear"></h2>
+                <div class="calendar-nav">
+                    <button onclick="changeMonth(-1)"><i class="fas fa-chevron-left"></i></button>
+                    <button onclick="changeMonth(1)"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            <div class="calendar-grid" id="calendarDays"></div>
+        </div>
+
+        <!-- Routine list -->
+        <div id="routineList" style="margin: 40px auto; max-width: 900px; padding: 30px 40px;">
+            <h2>Your Routine:</h2>
+            <p>Check off exercises as you complete them to track your progress in the calendar.</p>
+        </div>
+    </div>
+</body>
+</html>

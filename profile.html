@@ -1,0 +1,851 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="SideBar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: 
+        linear-gradient(rgba(13, 2, 33, 0.8), rgba(13, 2, 33, 0.8)),
+        url('background1.jpg') center/cover no-repeat fixed;
+      color: #d1f7ff;
+      display: flex;
+    }
+    .main-content {
+      margin-left: 250px;
+      padding: 40px;
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .profile-container {
+      background: rgba(26, 26, 46, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(5, 217, 232, 0.3);
+      box-shadow: 0 0 25px rgba(5, 217, 232, 0.3);
+      padding: 40px;
+      border-radius: 15px;
+      max-width: 900px;
+      width: 100%;
+      color: #fff;
+    }
+    .profile-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    .profile-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff2a6d, #05d9e8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: white;
+      margin-right: 20px;
+      box-shadow: 0 0 30px rgba(5, 217, 232, 0.6);
+    }
+    .profile-info h2 {
+      margin: 0;
+      color: #d1f7ff;
+    }
+    .profile-info p {
+      color: #aecde0;
+      margin-top: 5px;
+    }
+    .profile-section h3 {
+      color: #05d9e8;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .stat-card {
+      background: rgba(13, 2, 33, 0.7);
+      border: 1px solid rgba(255, 42, 109, 0.3);
+      box-shadow: 0 0 12px rgba(255, 42, 109, 0.1);
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #05d9e8;
+    }
+    .stat-label {
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>-->
+
+<!-- ✅ Sidebar -->
+<!--<nav class="sidebar">
+  <div class="collapse-btn">
+    <i class="fas fa-chevron-left"></i>
+  </div>
+  <div class="sidebar-title">
+            <div class="sidebar-title">Fitness Tracker</div>
+        </div>
+  <ul class="sidebar-menu">
+    <li><a href="fitness.html"><i class="fas fa-dumbbell"></i> <span>Workouts</span></a></li>
+    <li><a href="routine.html"><i class="fas fa-list-check"></i> <span>My Routine</span></a></li>
+    <li><a href="progress.html"><i class="fas fa-chart-line"></i> <span>Progress</span></a></li>
+    <li><a href="profile.html" class="active"><i class="fas fa-user"></i> <span>Profile</span></a></li>
+    <li><a href="loginpage.html"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
+  </ul>
+</nav>
+<button class="sidebar-toggle">
+  <i class="fas fa-bars"></i>
+</button>-->
+
+<!-- ✅ Main Content -->
+<!--<div class="main-content">
+  <div class="profile-container">
+    <div class="profile-header">
+      <div class="profile-avatar" id="avatar-initial">U</div>
+      <div class="profile-info">
+        <h2 id="username-display">Username</h2>
+        <p>Fitness Enthusiast</p>
+      </div>
+    </div>
+    <div class="profile-section">
+      <h3>Weekly Stats</h3>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">5</div>
+          <div class="stat-label">Workouts Completed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">3</div>
+          <div class="stat-label">Active Days</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">700</div>
+          <div class="stat-label">Calories Burned</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>-->
+
+<!-- ✅ Sidebar Script -->
+<!--<script>
+window.onload = () => {
+  const username = localStorage.getItem("username");
+  if (username) {
+    document.getElementById('username-display').textContent = username;
+    document.getElementById('avatar-initial').textContent = username.charAt(0).toUpperCase();
+  }
+
+  const welcomeElement = document.querySelector('.sidebar-welcome');
+  if (username && welcomeElement) {
+    welcomeElement.textContent = `Hi, ${username}`;
+  }
+
+  const sidebar = document.querySelector('.sidebar');
+  const collapseBtn = document.querySelector('.collapse-btn');
+  const collapseIcon = collapseBtn.querySelector('i');
+
+  const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+  if (isCollapsed) {
+    sidebar.classList.add('collapsed');
+    collapseIcon.classList.remove('fa-chevron-left');
+    collapseIcon.classList.add('fa-chevron-right');
+  }
+
+  collapseBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('collapsed');
+    collapseIcon.classList.toggle('fa-chevron-left');
+    collapseIcon.classList.toggle('fa-chevron-right');
+    localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
+  });
+
+  const toggleBtn = document.querySelector('.sidebar-toggle');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+    });
+  }
+
+  document.querySelectorAll('.sidebar-menu a').forEach(link => {
+    if (link.href === window.location.href || window.location.href.includes(link.getAttribute('href'))) {
+      link.classList.add('active');
+    }
+  });
+};
+</script>
+
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tracker - Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Cyberpunk Theme */
+        :root {
+            --neon-pink: #ff2a6d;
+            --neon-blue: #05d9e8;
+            --dark-bg: #0d0221;
+            --card-bg: rgba(26, 26, 46, 0.75);
+            --border-color: rgba(5, 217, 232, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            background: 
+                linear-gradient(rgba(13, 2, 33, 0.85), rgba(13, 2, 33, 0.85)),
+                url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') 
+                center/cover no-repeat fixed;
+            color: #d1f7ff;
+            display: flex;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: 280px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: var(--dark-bg);
+            color: #d1f7ff;
+            padding: 20px 0;
+            box-shadow: 0 0 30px rgba(5, 217, 232, 0.1);
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-right: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+        
+        .sidebar.collapsed {
+            width: 80px;
+        }
+        
+        .collapse-btn {
+            position: absolute;
+            top: 25px;
+            right: -15px;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-blue));
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 0 15px rgba(5, 217, 232, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .collapse-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 42, 109, 0.7);
+        }
+        
+        .collapse-btn i {
+            color: white;
+            font-size: 12px;
+        }
+        
+        .sidebar-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 5px;
+            padding: 0 20px;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            padding: 0 15px;
+            margin: 20px 0;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: #d1f7ff;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-menu a:hover {
+            background: rgba(255, 42, 109, 0.15);
+            color: #fff;
+            transform: translateX(5px);
+        }
+        
+        .sidebar-menu a.active {
+            background: linear-gradient(90deg, rgba(255, 42, 109, 0.3), rgba(5, 217, 232, 0.3));
+            color: #fff;
+            box-shadow: 0 0 15px rgba(5, 217, 232, 0.3);
+        }
+        
+        .sidebar-menu a i {
+            font-size: 1.2rem;
+            margin-right: 15px;
+            min-width: 20px;
+            color: var(--neon-blue);
+        }
+        
+        .sidebar.collapsed .sidebar-menu a span {
+            display: none;
+        }
+        
+        .sidebar.collapsed .sidebar-menu a {
+            justify-content: center;
+            padding: 15px 0;
+        }
+        
+        .sidebar.collapsed .sidebar-menu a i {
+            margin-right: 0;
+            font-size: 1.4rem;
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            padding: 30px;
+            transition: margin-left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: calc(100% - 280px);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        
+        .sidebar.collapsed + .main-content {
+            margin-left: 80px;
+            width: calc(100% - 80px);
+        }
+        
+        /* Profile Container */
+        .profile-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 25px rgba(5, 217, 232, 0.3);
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 900px;
+            width: 100%;
+            color: #fff;
+        }
+        
+        /* Profile Header */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            flex-shrink: 0;
+            box-shadow: 0 0 30px rgba(5, 217, 232, 0.6);
+        }
+        
+        .profile-info {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .profile-info h2 {
+            margin: 0;
+            color: #d1f7ff;
+            font-size: 2rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .profile-info p {
+            color: #aecde0;
+            margin-top: 5px;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: rgba(13, 2, 33, 0.7);
+            border: 1px solid rgba(255, 42, 109, 0.3);
+            box-shadow: 0 0 12px rgba(255, 42, 109, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 42, 109, 0.3);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--neon-blue);
+            margin: 10px 0;
+        }
+        
+        .stat-label {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        /* Profile Sections */
+        .profile-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(13, 2, 33, 0.5);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 42, 109, 0.2);
+        }
+        
+        .profile-section h3 {
+            color: var(--neon-blue);
+            border-bottom: 2px solid rgba(255, 42, 109, 0.5);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-family: 'Orbitron', sans-serif;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* Personal Info Form */
+        .info-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--neon-blue);
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 16px;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 10px rgba(255, 42, 109, 0.5);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        /* Buttons */
+        .btn {
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-blue));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-family: 'Orbitron', sans-serif;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(5, 217, 232, 0.3);
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(255, 42, 109, 0.5);
+        }
+        
+        .btn-edit {
+            background: transparent;
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 5px 15px;
+            font-size: 0.8rem;
+        }
+        
+        /* Display Mode */
+        .info-display p {
+            margin: 8px 0;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            border-left: 3px solid var(--neon-blue);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+            
+            .sidebar.collapsed + .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            .sidebar {
+                left: -280px;
+            }
+            
+            .sidebar.active {
+                left: 0;
+            }
+            
+            .sidebar-toggle {
+                display: block;
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 1100;
+                background: linear-gradient(135deg, var(--neon-pink), var(--neon-blue));
+                color: white;
+                border: none;
+                padding: 10px 15px;
+                border-radius: 30px;
+                cursor: pointer;
+                box-shadow: 0 0 15px rgba(5, 217, 232, 0.5);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .profile-info {
+                text-align: center;
+            }
+            
+            .profile-section {
+                padding: 15px;
+            }
+            
+            .info-form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="collapse-btn">
+            <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="sidebar-title">Fitness Tracker</div>
+        <ul class="sidebar-menu">
+            <li><a href="fitness.html"><i class="fas fa-dumbbell"></i> <span>Workouts</span></a></li>
+            <li><a href="routine.html"><i class="fas fa-list-check"></i> <span>My Routine</span></a></li>
+            <li><a href="progress.html"><i class="fas fa-chart-line"></i> <span>Progress</span></a></li>
+            <li><a href="profile.html" class="active"><i class="fas fa-user"></i> <span>Profile</span></a></li>
+            <li><a href="loginpage.html"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-avatar" id="avatar-initial">U</div>
+                <div class="profile-info">
+                    <h2 id="username-display">Username</h2>
+                    <p>Fitness Enthusiast</p>
+                    <button class="btn btn-edit" id="edit-profile-btn">Edit Profile</button>
+                </div>
+            </div>
+            
+            <!-- Stats Section -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">Workouts Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Active Days</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">700</div>
+                    <div class="stat-label">Calories Burned</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">85%</div>
+                    <div class="stat-label">Routine Completion</div>
+                </div>
+            </div>
+            
+            <!-- Personal Information Section -->
+            <div class="profile-section">
+                <h3>Personal Information <button class="btn btn-edit" id="edit-info-btn">Edit</button></h3>
+                <div class="info-display" id="info-display">
+                    <p><strong>Full Name:</strong> <span id="display-name">John Doe</span></p>
+                    <p><strong>Email:</strong> <span id="display-email">john.doe@example.com</span></p>
+                    <p><strong>Age:</strong> <span id="display-age">28</span></p>
+                    <p><strong>Height:</strong> <span id="display-height">175 cm</span></p>
+                    <p><strong>Weight:</strong> <span id="display-weight">75 kg</span></p>
+                    <p><strong>Fitness Goals:</strong> <span id="display-goals">Build muscle, Increase stamina</span></p>
+                </div>
+                
+                <form class="info-form" id="info-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="full-name">Full Name</label>
+                        <input type="text" id="full-name" placeholder="Enter your full name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" placeholder="Enter your age">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="height">Height (cm)</label>
+                        <input type="number" id="height" placeholder="Enter your height">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="weight">Weight (kg)</label>
+                        <input type="number" id="weight" placeholder="Enter your weight">
+                    </div>
+                    
+                    <div class="form-group" style="grid-column: span 2;">
+                        <label for="goals">Fitness Goals</label>
+                        <textarea id="goals" placeholder="Describe your fitness goals"></textarea>
+                    </div>
+                    
+                    <div class="form-group" style="grid-column: span 2; text-align: right;">
+                        <button type="button" class="btn" id="cancel-edit">Cancel</button>
+                        <button type="button" class="btn" id="save-info">Save Information</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Fitness Preferences Section -->
+            <div class="profile-section">
+                <h3>Fitness Preferences</h3>
+                <div class="info-display">
+                    <p><strong>Workout Frequency:</strong> 5 days/week</p>
+                    <p><strong>Preferred Workout Time:</strong> Morning (6-9 AM)</p>
+                    <p><strong>Focus Areas:</strong> Upper body, Core strength</p>
+                    <p><strong>Experience Level:</strong> Intermediate</p>
+                </div>
+            </div>
+            
+            <!-- Achievements Section -->
+            <div class="profile-section">
+                <h3>Achievements</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-medal" style="font-size: 2rem; color: gold;"></i>
+                        <div class="stat-label">30-Day Streak</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-fire" style="font-size: 2rem; color: var(--neon-pink);"></i>
+                        <div class="stat-label">100 Workouts</div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-heartbeat" style="font-size: 2rem; color: var(--neon-blue);"></i>
+                        <div class="stat-label">Cardio Master</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set username from localStorage
+            const username = localStorage.getItem("username") || "User";
+            document.getElementById('username-display').textContent = username;
+            document.getElementById('avatar-initial').textContent = username.charAt(0).toUpperCase();
+            
+            // Collapse button functionality
+            const sidebar = document.querySelector('.sidebar');
+            const collapseBtn = document.querySelector('.collapse-btn');
+            const collapseIcon = collapseBtn.querySelector('i');
+            
+            // Load saved state
+            const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+            if (isCollapsed) {
+                sidebar.classList.add('collapsed');
+                collapseIcon.classList.remove('fa-chevron-left');
+                collapseIcon.classList.add('fa-chevron-right');
+            }
+            
+            collapseBtn.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                collapseIcon.classList.toggle('fa-chevron-left');
+                collapseIcon.classList.toggle('fa-chevron-right');
+                localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
+            });
+            
+            // Personal info form functionality
+            const infoDisplay = document.getElementById('info-display');
+            const infoForm = document.getElementById('info-form');
+            const editInfoBtn = document.getElementById('edit-info-btn');
+            const cancelEditBtn = document.getElementById('cancel-edit');
+            const saveInfoBtn = document.getElementById('save-info');
+            
+            // Load saved info if available
+            loadSavedInfo();
+            
+            editInfoBtn.addEventListener('click', function() {
+                infoDisplay.style.display = 'none';
+                infoForm.style.display = 'grid';
+                editInfoBtn.style.display = 'none';
+            });
+            
+            cancelEditBtn.addEventListener('click', function() {
+                infoDisplay.style.display = 'block';
+                infoForm.style.display = 'none';
+                editInfoBtn.style.display = 'block';
+            });
+            
+            saveInfoBtn.addEventListener('click', function() {
+                // Get form values
+                const fullName = document.getElementById('full-name').value;
+                const email = document.getElementById('email').value;
+                const age = document.getElementById('age').value;
+                const height = document.getElementById('height').value;
+                const weight = document.getElementById('weight').value;
+                const goals = document.getElementById('goals').value;
+                
+                // Update display
+                document.getElementById('display-name').textContent = fullName || 'Not provided';
+                document.getElementById('display-email').textContent = email || 'Not provided';
+                document.getElementById('display-age').textContent = age ? `${age} years` : 'Not provided';
+                document.getElementById('display-height').textContent = height ? `${height} cm` : 'Not provided';
+                document.getElementById('display-weight').textContent = weight ? `${weight} kg` : 'Not provided';
+                document.getElementById('display-goals').textContent = goals || 'Not provided';
+                
+                // Save to localStorage
+                localStorage.setItem('profile-fullName', fullName);
+                localStorage.setItem('profile-email', email);
+                localStorage.setItem('profile-age', age);
+                localStorage.setItem('profile-height', height);
+                localStorage.setItem('profile-weight', weight);
+                localStorage.setItem('profile-goals', goals);
+                
+                // Switch back to display mode
+                infoDisplay.style.display = 'block';
+                infoForm.style.display = 'none';
+                editInfoBtn.style.display = 'block';
+            });
+            
+            function loadSavedInfo() {
+                const fullName = localStorage.getItem('profile-fullName') || 'John Doe';
+                const email = localStorage.getItem('profile-email') || 'john.doe@example.com';
+                const age = localStorage.getItem('profile-age') || '28';
+                const height = localStorage.getItem('profile-height') || '175';
+                const weight = localStorage.getItem('profile-weight') || '75';
+                const goals = localStorage.getItem('profile-goals') || 'Build muscle, Increase stamina';
+                
+                // Set display values
+                document.getElementById('display-name').textContent = fullName;
+                document.getElementById('display-email').textContent = email;
+                document.getElementById('display-age').textContent = age ? `${age} years` : 'Not provided';
+                document.getElementById('display-height').textContent = height ? `${height} cm` : 'Not provided';
+                document.getElementById('display-weight').textContent = weight ? `${weight} kg` : 'Not provided';
+                document.getElementById('display-goals').textContent = goals;
+                
+                // Set form values
+                document.getElementById('full-name').value = fullName;
+                document.getElementById('email').value = email;
+                document.getElementById('age').value = age;
+                document.getElementById('height').value = height;
+                document.getElementById('weight').value = weight;
+                document.getElementById('goals').value = goals;
+            }
+        });
+    </script>
+</body>
+</html>

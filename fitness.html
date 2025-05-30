@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Workout</title>
+        <link rel="stylesheet" href="textstyles.css">
+        <link rel="stylesheet" href="inputstyles.css">
+        <link rel="stylesheet" href="menu.css">
+        <link rel="stylesheet" href="SideBar.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+        <script>
+            function submitRoutine() {
+                const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach((checkbox) => {
+                    localStorage.setItem(checkbox.id, checkbox.checked);
+                });
+                window.location.href = 'routine.html';
+            }
+
+            function toggleSidebar() {
+                document.querySelector('.sidebar').classList.toggle('active');
+            }
+
+            function updateSidebar() {
+                const username = localStorage.getItem("username");
+                const welcomeElement = document.querySelector('.sidebar-welcome');
+                if (username && welcomeElement) {
+                    welcomeElement.textContent = `Hi, ${username}`;
+                }
+            }
+
+            window.onload = () => {
+                // Set up welcome message
+                const username = localStorage.getItem("username");
+                const welcometag = document.getElementById("welcome");
+                if (username && welcometag) {
+                    welcometag.innerHTML = `Welcome ${username}!<br>Ready To create a New Routine?`;
+                }
+
+                // Set up sidebar toggle
+                document.querySelector('.sidebar-toggle').addEventListener('click', toggleSidebar);
+                updateSidebar();
+
+                // Load previously selected exercises
+                const exerciseIDS = [
+                    "pushup", "butterflypecdec", "dumbellincline","legraises",
+                    "russian", "handplank", "boxdips", "bicepcurls", "bandpushup",
+                    "lateralraise", "chinups", "bayesian", "pullups", "barpullover",
+                    "dumbellrow", "barbellsquat", "machineleg", "gluteham", 
+                    "calvestretch", "calveraises", "machinecalve", "hipthrust", 
+                    "deadlifts", "gobletsquat"
+                ];
+                
+                exerciseIDS.forEach(id => {
+                    const checkbox = document.getElementById(id);
+                    if (checkbox) {
+                        checkbox.checked = localStorage.getItem(id) === 'true';
+                    }
+                });
+                
+                // Collapse button functionality
+                const sidebar = document.querySelector('.sidebar');
+                const collapseBtn = document.querySelector('.collapse-btn');
+                const collapseIcon = collapseBtn.querySelector('i');
+
+                // Load saved state
+                const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+                if (isCollapsed) {
+                    sidebar.classList.add('collapsed');
+                    collapseIcon.classList.remove('fa-chevron-left');
+                    collapseIcon.classList.add('fa-chevron-right');
+                }
+
+                collapseBtn.addEventListener('click', function() {
+                    sidebar.classList.toggle('collapsed');
+                    collapseIcon.classList.toggle('fa-chevron-left');
+                    collapseIcon.classList.toggle('fa-chevron-right');
+                    localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
+                });
+            }
+        </script>
+    </head>
+    <body class="fitness-page">
+       <!-- Sidebar -->
+        <div class="sidebar">
+            
+            <div class="collapse-btn">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="sidebar-title">
+            <div class="sidebar-title">Fitness Tracker</div>
+        </div>
+            <ul class="sidebar-menu">
+                <li><a href="fitness.html" class="active"><i class="fas fa-dumbbell"></i> <span>Workouts</span></a></li>
+                <li><a href="routine.html"><i class="fas fa-list-check"></i> <span>My Routine</span></a></li>
+                <li><a href="progress.html"><i class="fas fa-chart-line"></i> <span>Progress</span></a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i> <span>Profile</span></a></li>
+                <li><a href="loginpage.html"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
+            </ul>
+        </div>
+        <button class="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1 id="welcome"></h1>
+            
+            <div class="workout-section">
+                <h1 class="section-title">Upper Body</h1>
+                <h2 class="muscle-group">Chest</h2>
+                <form>
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="pushup" class="add-to-routine">
+                            <input type="checkbox" id="pushup" name="pushup">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Push Ups</h3>
+                        <p class="exercise-sets">10 reps, 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/upperbody/pushup 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/upperbody/pushup 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="butterflypecdec" class="add-to-routine">
+                            <input type="checkbox" id="butterflypecdec" name="butterflypecdec">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Butterfly (Pec Decks)</h3>
+                        <p class="exercise-sets">12 reps, 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/upperbody/pecdecs 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/upperbody/pecdecs 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="dumbellincline" class="add-to-routine">
+                            <input type="checkbox" id="dumbellincline" name="dumbellincline">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Dumbbell Incline Bench Press</h3>
+                        <p class="exercise-sets">12 reps, 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/upperbody/dumbell press 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/upperbody/dumbell press 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+                </form>
+
+                <h2 class="muscle-group">ABS</h2>
+                <form>
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="legraises" class="add-to-routine">
+                            <input type="checkbox" id="legraises" name="legraises">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Leg Raises</h3>
+                        <p class="exercise-sets">15 reps, 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/upperbody/legraises 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/upperbody/legraises 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="russian" class="add-to-routine">
+                            <input type="checkbox" id="russian" name="russian">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Russian Twists</h3>
+                        <p class="exercise-sets">20 reps, 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/upperbody/russian 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/upperbody/russian 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="handplank" class="add-to-routine">
+                            <input type="checkbox" id="handplank" name="handplank">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Hand Plank</h3>
+                        <p class="exercise-sets">60 seconds, 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/upperbody/plank 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/upperbody/plank 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+                </form>
+
+                <h2 class="muscle-group">Shoulders, Biceps, Triceps</h2>
+                <form>
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="boxdips" class="add-to-routine">
+                            <input type="checkbox" id="boxdips" name="boxdips">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Box Dips</h3>
+                        <p class="exercise-sets">10 reps, 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/upperbody/boxdips 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/upperbody/boxdips 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="bicepcurls" class="add-to-routine">
+                            <input type="checkbox" id="bicepcurls" name="bicepcurls">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Bicep Curls</h3>
+                        <p class="exercise-sets">15 reps, 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/upperbody/bicepcurl 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/upperbody/bicep curl 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="bandpushup" class="add-to-routine">
+                            <input type="checkbox" id="bandpushup" name="bandpushup">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Band Push Ups</h3>
+                        <p class="exercise-sets">10 reps, 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/upperbody/bandpushups 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/upperbody/bandpushups 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="lateralraise" class="add-to-routine">
+                            <input type="checkbox" id="lateralraise" name="lateralraise">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Cable Low Single Arm Lateral Raise</h3>
+                        <p class="exercise-sets">10 reps, 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/upperbody/cablelowsingle 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/upperbody/cablelowsingle 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="chinups" class="add-to-routine">
+                            <input type="checkbox" id="chinups" name="chinups">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Chin Ups</h3>
+                        <p class="exercise-sets">10 reps, 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/upperbody/chinups 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/upperbody/chinups 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="bayesian" class="add-to-routine">
+                            <input type="checkbox" id="bayesian" name="bayesian">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Cable Bayesian Curl</h3>
+                        <p class="exercise-sets">10 reps, 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/upperbody/cablebayesiancurl 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/upperbody/cablebayesiancurl 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+                </form>
+
+                <h2 class="muscle-group">Back</h2>
+                <form>
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="pullups" class="add-to-routine">
+                            <input type="checkbox" id="pullups" name="pullups">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Pull Ups</h3>
+                        <p class="exercise-sets">10 reps, 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/upperbody/pullups 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/upperbody/pullups 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="barpullover" class="add-to-routine">
+                            <input type="checkbox" id="barpullover" name="barpullover">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Cable Bent Over Bar Pullover</h3>
+                        <p class="exercise-sets">10 reps, 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/upperbody/cablebentover 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/upperbody/cablebentover 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="dumbellrow" class="add-to-routine">
+                            <input type="checkbox" id="dumbellrow" name="dumbellrow">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Dumbbell Row Unilateral</h3>
+                        <p class="exercise-sets">10 reps, 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/upperbody/dumbellrowuni 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/upperbody/dumbellrowuni 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+                </form>
+            </div>
+
+            <div class="workout-section">
+                <h1 class="section-title">Lower Body</h1>
+                <h2 class="muscle-group">Thighs and Hamstring</h2>
+                <form>
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="barbellsquat" class="add-to-routine">
+                            <input type="checkbox" id="barbellsquat" name="barbellsquat">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Barbell Squats</h3>
+                        <p class="exercise-sets">10 reps, 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/lowerbody/barbellsquat 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/lowerbody/barbellsquat 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="machineleg" class="add-to-routine">
+                            <input type="checkbox" id="machineleg" name="machineleg">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Machine Leg Extension</h3>
+                        <p class="exercise-sets">10 reps, 3 reps</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/lowerbody/machineleg 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/lowerbody/machineleg 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="gluteham" class="add-to-routine">
+                            <input type="checkbox" id="gluteham" name="gluteham">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Glute Ham Raise</h3>
+                        <p class="exercise-sets">10 reps, 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/lowerbody/gluteham 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/lowerbody/gluteham 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video> 
+                    </div>
+                </div>
+                </form>
+
+                <h2 class="muscle-group">Calves</h2>
+                <form>
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="calvestretch" class="add-to-routine">
+                            <input type="checkbox" id="calvestretch" name="calvestretch">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Calves Stretch</h3>
+                        <p class="exercise-sets">20 reps, 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/lowerbody/calvestretch 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/lowerbody/calvestretch 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="calveraises" class="add-to-routine">
+                            <input type="checkbox" id="calveraises" name="calveraises">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Barbell Calf Raises</h3>
+                        <p class="exercise-sets">15 reps, 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/lowerbody/calveraises 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/lowerbody/calfraises 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="machinecalve" class="add-to-routine">
+                            <input type="checkbox" id="machinecalve" name="machinecalve">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Machine Seated Calf Raises</h3>
+                        <p class="exercise-sets">10 reps 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/lowerbody/machinecalveraises 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/lowerbody/machinecalveraises 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+                </form>
+
+                <h2 class="muscle-group">Glutes</h2>
+                <form>
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="hipthrust" class="add-to-routine">
+                            <input type="checkbox" id="hipthrust" name="hipthrust">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Barbell Hip Thrust</h3>
+                        <p class="exercise-sets">10 reps, 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/lowerbody/hipthrust 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/lowerbody/hipthrust 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="deadlifts" class="add-to-routine">
+                            <input type="checkbox" id="deadlifts" name="deadlifts">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Barbell Stiff Leg Deadlifts</h3>
+                        <p class="exercise-sets">10 reps, 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/lowerbody/deadlifts 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/lowerbody/deadlifts 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+
+                <div class="exercise-card">
+                    <div class="exercise-header">
+                        <label for="gobletsquat" class="add-to-routine">
+                            <input type="checkbox" id="gobletsquat" name="gobletsquat">
+                            Add to Routine
+                        </label>
+                        <h3 class="exercise-name">Dumbbell Goblet Squats</h3>
+                        <p class="exercise-sets">15 reps, 3 sets</p>
+                    </div>
+                    <div class="exercise-videos">
+                        <video src="workout_videos/lowerbody/gobletsquat 1.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                        <video src="workout_videos/lowerbody/gobletsquat 2.mp4" type="mp4/mpeg" autoplay loop muted width="400px" height="400px"></video>
+                    </div>
+                </div>
+                </form>
+            </div>
+
+            <div class="submit-section">
+                <button id="submit" class="submit-btn" onclick="submitRoutine()">
+                    <i class="fas fa-check-circle"></i> Submit Routine
+                </button>
+            </div>
+        </div>
+
+        <style>
+            /* Additional CSS for the workout page */
+            .workout-section {
+                margin-bottom: 40px;
+                background-color: white;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            }
+            
+            .section-title {
+                text-align: center;
+                font-size: 2rem;
+                color: #2c3e50;
+                margin-bottom: 20px;
+                padding-bottom: 10px;
+                border-bottom: 2px solid #3498db;
+            }
+            
+            .muscle-group {
+                font-size: 1.5rem;
+                color: #3498db;
+                margin: 20px 0 15px;
+                padding-bottom: 8px;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .exercise-card {
+                margin-bottom: 30px;
+                padding: 15px;
+                border-radius: 8px;
+                background-color: #f9f9f9;
+                transition: transform 0.3s ease;
+            }
+            
+            .exercise-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            }
+            
+            .exercise-header {
+                margin-bottom: 15px;
+            }
+            
+            .add-to-routine {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 10px;
+                cursor: pointer;
+            }
+            
+            .add-to-routine input {
+                transform: scale(1.3);
+            }
+            
+            .exercise-name {
+                font-size: 1.3rem;
+                margin: 5px 0;
+                color: #2c3e50;
+            }
+            
+            .exercise-sets {
+                color: #7f8c8d;
+                font-size: 0.9rem;
+                margin: 5px 0;
+            }
+            
+            .exercise-videos {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 15px;
+                justify-content: center;
+            }
+            
+            .exercise-videos video {
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            
+            .submit-section {
+                text-align: center;
+                margin: 30px 0;
+            }
+            
+            .submit-btn {
+                background-color: #3498db;
+                color: white;
+                border: none;
+                padding: 12px 25px;
+                font-size: 1.1rem;
+                border-radius: 30px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+            }
+            
+            .submit-btn:hover {
+                background-color: #2980b9;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 12px rgba(52, 152, 219, 0.3);
+            }
+            
+            .submit-btn i {
+                margin-right: 8px;
+            }
+            
+            @media (max-width: 768px) {
+                .exercise-videos video {
+                    width: 100%;
+                    height: auto;
+                }
+                
+                .section-title {
+                    font-size: 1.5rem;
+                }
+                
+                .muscle-group {
+                    font-size: 1.2rem;
+                }
+            }
+
+            /* Sidebar welcome message */
+            .sidebar-welcome {
+                font-size: 0.9rem;
+                color: #ecf0f1;
+                margin-top: 5px;
+                text-align: center;
+            }
+            /* For fitness.html */
+body.fitness-page {
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(255, 42, 109, 0.15) 0%, transparent 35%),
+        radial-gradient(circle at 80% 70%, rgba(5, 217, 232, 0.15) 0%, transparent 35%),
+        linear-gradient(135deg, #0d0221, #1a0638);
+    position: relative;
+}
+
+body.fitness-page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 49px,
+            rgba(255, 42, 109, 0.03) 49px,
+            rgba(255, 42, 109, 0.03) 50px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 49px,
+            rgba(5, 217, 232, 0.03) 49px,
+            rgba(5, 217, 232, 0.03) 50px
+        );
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Glowing particles effect */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 42, 109, 0.2) 0%, transparent 70%),
+                radial-gradient(circle, rgba(5, 217, 232, 0.2) 0%, transparent 70%);
+    background-position: 20% 30%, 80% 70%;
+    background-repeat: no-repeat;
+    animation: pulse 15s infinite alternate;
+    z-index: -2;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.3; }
+    100% { opacity: 0.7; }
+}
+/* === WORKOUT PAGE ENHANCEMENTS === */
+.workout-section {
+    background: rgba(13, 2, 33, 0.7);
+    border: 1px solid rgba(5, 217, 232, 0.3);
+    box-shadow: 0 0 30px rgba(255, 42, 109, 0.2);
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.workout-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.02) 0%,
+        rgba(255, 42, 109, 0.05) 50%,
+        rgba(5, 217, 232, 0.05) 100%
+    );
+    pointer-events: none;
+}
+
+.section-title {
+    background: linear-gradient(90deg, #ff2a6d, #05d9e8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 20px rgba(5, 217, 232, 0.5);
+}
+
+/* Exercise card enhancements */
+.exercise-card {
+    background: rgba(26, 26, 46, 0.6);
+    border: 1px solid rgba(5, 217, 232, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.exercise-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(255, 42, 109, 0.3);
+    border-color: rgba(255, 42, 109, 0.4);
+}
+
+/* Submit button glow */
+.submit-btn {
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 20px rgba(5, 217, 232, 0.6);
+    }
+    to {
+        box-shadow: 0 0 40px rgba(255, 42, 109, 0.8);
+    }
+}
+#welcome {
+    font-size: 2.2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #8AFFFB; /* A very light, crisp cyan */
+    text-shadow: 0 0 8px rgba(138, 255, 251, 0.6); /* Adds a subtle glow */
+}
+
+        </style>
+        
+    </body>
+</html>

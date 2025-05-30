@@ -1,0 +1,111 @@
+/* calendar.css */
+.calendar-container {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calendar-title {
+  font-size: 1.5rem;
+  color: #2c3e50;
+}
+
+.calendar-nav {
+  display: flex;
+  gap: 10px;
+}
+
+.calendar-nav button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.calendar-day-header {
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  color: #2c3e50;
+}
+
+.calendar-day {
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  padding: 10px;
+  min-height: 80px;
+  position: relative;
+}
+
+.calendar-day.empty {
+  background-color: transparent;
+}
+
+.calendar-day-number {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.calendar-day.today {
+  background-color: #e3f2fd;
+  border: 1px solid #3498db;
+}
+
+.calendar-workout {
+  background-color: #3498db;
+  color: white;
+  font-size: 0.8rem;
+  padding: 2px 5px;
+  border-radius: 3px;
+  margin-top: 5px;
+  display: block;
+}
+
+.calendar-workout.completed {
+  background-color: #2ecc71;
+}
+
+.calendar-workout.missed {
+  background-color: #e74c3c;
+}
+/* Add after all existing content */
+/* ===== CALENDAR POSITION FIX ===== */
+.calendar-container {
+  max-width: 900px;
+  margin: 20px auto; /* Center horizontally */
+  transition: none !important; /* Prevent transitions */
+}
+
+/* Remove any sidebar-related positioning */
+.calendar-header,
+.calendar-grid {
+  transform: none !important;
+}
+/* ===== CALENDAR POSITION FIX ===== */
+.calendar-container {
+  max-width: 900px;
+  margin: 20px auto !important;
+  transition: none !important;
+}
+
+.calendar-header,
+.calendar-grid {
+  transform: none !important;
+}

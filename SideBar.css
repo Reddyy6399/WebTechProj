@@ -1,0 +1,656 @@
+/* SideBar.css */
+
+:root {
+    --sidebar-bg-color: #2c3e50; /* Dark blue-grey, similar to the image */
+    --sidebar-text-color: #ecf0f1; /* Light grey for text */
+    --sidebar-hover-bg: #34495e; /* Slightly darker on hover */
+    --sidebar-active-bg: #3498db; /* Blue for active link, similar to the image */
+    --sidebar-active-text: #ffffff; /* White text for active link */
+    --header-text-color: #ecf0f1;
+    --border-color: #3f556a; /* Border for menu items */
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex; /* This will allow the sidebar and main content to sit side-by-side */
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    background-color: #f4f7f6; /* A light background for the main content area */
+    color: #333; /* Default text color for content */
+}
+
+.sidebar {
+    width: 250px; /* Fixed width as seen in the image */
+    background-color: var(--sidebar-bg-color);
+    color: var(--sidebar-text-color);
+    padding: 20px 0; /* Vertical padding */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    display: flex;
+    flex-direction: column;
+    position: relative; /* For collapse button positioning */
+    transition: width 0.3s ease; /* Smooth transition for collapsing */
+    flex-shrink: 0; /* Prevent sidebar from shrinking */
+}
+
+.sidebar.collapsed {
+    width: 60px; /* Collapsed width */
+}
+
+.sidebar-header {
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color); /* Separator */
+    margin-bottom: 20px;
+    position: relative; /* For positioning the user greeting if it's separate */
+}
+
+.sidebar-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--header-text-color);
+    margin-bottom: 5px;
+}
+
+.sidebar.collapsed .sidebar-title,
+.sidebar.collapsed .sidebar-welcome {
+    display: none; /* Hide text when collapsed */
+}
+
+.sidebar-welcome {
+    font-size: 0.9em;
+    color: var(--header-text-color);
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1; /* Allows menu to take available space */
+}
+
+.sidebar-menu li {
+    margin-bottom: 5px; /* Space between menu items */
+}
+
+.sidebar-menu a {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: var(--sidebar-text-color);
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border-radius: 5px; /* Slightly rounded corners for links */
+    /* Remove padding from the right if it's affecting icon alignment */
+    /* padding-right: 0; */
+}
+
+.sidebar-menu a:hover {
+    background-color: var(--sidebar-hover-bg);
+}
+
+.sidebar-menu a.active {
+    background-color: var(--sidebar-active-bg);
+    color: var(--sidebar-active-text);
+}
+
+.sidebar-menu a i {
+    margin-right: 15px; /* Space between icon and text */
+    font-size: 1.2em; /* Icon size */
+    width: 20px; /* Fixed width for icons to keep alignment */
+    text-align: center;
+}
+
+.sidebar.collapsed .sidebar-menu a span {
+    display: none; /* Hide text when collapsed */
+}
+
+.sidebar.collapsed .sidebar-menu a {
+    justify-content: center; /* Center icons when collapsed */
+    padding: 12px 0; /* Adjust padding for collapsed state */
+}
+
+.sidebar.collapsed .sidebar-menu a i {
+    margin-right: 0; /* No margin when text is hidden */
+}
+
+.sidebar-footer {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color); /* Separator */
+    font-size: 0.8em;
+    color: #95a5a6; /* Lighter grey for footer text */
+    margin-top: 20px;
+}
+
+.sidebar.collapsed .sidebar-footer {
+    display: none; /* Hide footer when collapsed */
+}
+
+/* Collapse button styling */
+.collapse-btn {
+    position: absolute;
+    top: 20px;
+    right: -15px; /* Halfway outside the sidebar */
+    background-color: var(--sidebar-active-bg);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; /* Circular button */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 10; /* Ensure it's above other content */
+    transition: right 0.3s ease;
+}
+
+.sidebar.collapsed .collapse-btn {
+    right: -15px; /* Keep it outside when collapsed */
+}
+
+.collapse-btn i {
+    font-size: 1em;
+}
+
+/* Status Indicator (if needed, though not prominent in the image) */
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    background-color: #e74c3c; /* Red for inactive */
+    border-radius: 50%;
+    margin-left: auto; /* Push to the right */
+    display: none; /* Hide by default, only show when needed */
+}
+
+.status-indicator.active {
+    background-color: #2ecc71; /* Green for active */
+    display: block;
+}
+
+.sidebar.collapsed .status-indicator {
+    display: none; /* Hide when sidebar is collapsed */
+}
+
+/* Main Content adjustment */
+.main-content {
+    flex-grow: 1; /* Allows main content to take remaining space */
+    padding: 20px;
+    transition: margin-left 0.3s ease, width 0.3s ease; /* Smooth transition for content shift */
+    /* Initial margin if the sidebar is not collapsed by default */
+    margin-left: 0; 
+}
+
+/* Adjust main content margin when sidebar is collapsed */
+.sidebar.collapsed + .main-content {
+    /* When sidebar collapses from 250px to 60px, the content should shift by 190px */
+    margin-left: -190px; /* Adjust this value if your content is shifting too much or too little */
+    width: calc(100% - 60px); /* Fill remaining width */
+}
+
+
+/* Responsive adjustments for mobile toggle */
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        left: -250px; /* Hide sidebar by default on smaller screens */
+        height: 100%;
+        z-index: 1000;
+        box-shadow: none; /* No shadow when hidden */
+    }
+
+    .sidebar.active {
+        left: 0; /* Show sidebar when active */
+    }
+
+    .main-content {
+        margin-left: 0; /* No margin on mobile */
+    }
+
+    .sidebar.collapsed {
+        width: 250px; /* Maintain full width on mobile when 'collapsed' is toggled via JS */
+        left: -250px;
+    }
+
+    .sidebar.collapsed.active {
+        left: 0;
+    }
+
+    .collapse-btn {
+        display: none; /* Hide the collapse button on smaller screens */
+    }
+
+    /* Add a toggle button for mobile if you want one */
+    .sidebar-toggle {
+        display: block; /* Or flex, block etc. */
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1001;
+        background-color: var(--sidebar-active-bg);
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+}
+/* Add after all existing content */
+/* ===== UPDATED SIDEBAR LAYOUT ===== */
+.sidebar {
+    position: relative; /* Changed from fixed */
+    left: 0; /* Changed from fixed positioning */
+    height: auto;
+    float: left; /* Added */
+    z-index: 1000;
+  }
+  
+  /* Remove mobile-specific positioning */
+  @media (max-width: 768px) {
+    .sidebar {
+      position: relative;
+      left: 0;
+      float: none;
+    }
+  }
+  
+  /* Remove negative margins from main content */
+  .sidebar.collapsed + .main-content {
+    margin-left: 0; /* Removed negative margin */
+    width: auto;
+  }
+  
+  /* Adjust main content padding instead of margins */
+  .main-content {
+    padding: 20px;
+    margin-left: 0; /* Removed margin */
+    padding-left: 270px; /* Added padding for sidebar space */
+    transition: padding-left 0.3s ease; /* Animate padding instead of margin */
+  }
+  
+  .sidebar.collapsed + .main-content {
+    padding-left: 80px; /* Adjust padding for collapsed sidebar */
+  }
+  /* ===== COLLAPSE BUTTON STYLES ===== */
+.collapse-btn {
+    position: absolute;
+    top: 20px;
+    right: -15px;
+    background-color: #3498db;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+  }
+  
+  .collapse-btn i {
+    font-size: 1em;
+  }
+  
+  .sidebar.collapsed .collapse-btn {
+    right: -15px;
+  }
+  /* Add to bottom of SideBar.css */
+.collapse-btn {
+    position: absolute;
+    top: 20px;
+    right: -15px;
+    background-color: #3498db;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+  }
+  
+  .collapse-btn i {
+    font-size: 1em;
+  }
+  
+  .sidebar.collapsed .collapse-btn {
+    right: -15px;
+  }
+  
+  .main-content {
+    padding: 20px;
+    margin-left: 0;
+    padding-left: 270px;
+    transition: padding-left 0.3s ease;
+  }
+  
+  .sidebar.collapsed + .main-content {
+    padding-left: 80px;
+  }
+  /* 💫 Cyberpunk Neon Sidebar */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap');
+
+:root {
+  --sidebar-bg-color: #0d0221;
+  --sidebar-text-color: #d1f7ff;
+  --sidebar-hover-bg: rgba(255, 42, 109, 0.15);
+  --sidebar-active-bg: linear-gradient(90deg, rgba(255, 42, 109, 0.3), rgba(5, 217, 232, 0.3));
+  --sidebar-active-text: #fff;
+  --sidebar-border: 1px solid rgba(5, 217, 232, 0.2);
+  --neon-pink: #ff2a6d;
+  --neon-blue: #05d9e8;
+}
+
+.sidebar {
+  width: 280px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: var(--sidebar-bg-color);
+  color: var(--sidebar-text-color);
+  padding: 20px 0;
+  box-shadow: 0 0 30px rgba(5, 217, 232, 0.1);
+  font-family: 'Rajdhani', sans-serif;
+  z-index: 1000;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-right: var(--sidebar-border);
+  overflow: hidden;
+}
+
+.sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(255, 42, 109, 0.05) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+.sidebar-header {
+  text-align: center;
+  padding: 0 20px 20px;
+  margin-bottom: 20px;
+  border-bottom: var(--sidebar-border);
+  position: relative;
+}
+
+.sidebar-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(90deg, var(--neon-pink), var(--neon-blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.sidebar-welcome {
+  font-size: 0.9rem;
+  color: var(--neon-blue);
+  margin-top: 5px;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.sidebar.collapsed .sidebar-title,
+.sidebar.collapsed .sidebar-welcome {
+  opacity: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0 15px;
+  margin: 0;
+}
+
+.sidebar-menu li {
+  margin-bottom: 5px;
+  position: relative;
+}
+
+.sidebar-menu li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--neon-pink);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.sidebar-menu li:hover::before {
+  opacity: 1;
+}
+
+.sidebar-menu a {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  color: var(--sidebar-text-color);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-menu a:hover {
+  background: var(--sidebar-hover-bg);
+  color: #fff;
+  transform: translateX(5px);
+}
+
+.sidebar-menu a.active {
+  background: var(--sidebar-active-bg);
+  color: var(--sidebar-active-text);
+  box-shadow: 0 0 15px rgba(5, 217, 232, 0.3);
+}
+
+.sidebar-menu a i {
+  font-size: 1.2rem;
+  margin-right: 15px;
+  min-width: 20px;
+  text-align: center;
+  color: var(--neon-blue);
+  transition: all 0.3s ease;
+}
+
+.sidebar-menu a.active i,
+.sidebar-menu a:hover i {
+  color: var(--neon-pink);
+  text-shadow: 0 0 10px rgba(255, 42, 109, 0.7);
+}
+
+.sidebar-menu a span {
+  transition: all 0.3s ease;
+}
+
+.sidebar.collapsed .sidebar-menu a span {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.sidebar.collapsed .sidebar-menu a {
+  justify-content: center;
+  padding: 15px 0;
+}
+
+.sidebar.collapsed .sidebar-menu a i {
+  margin-right: 0;
+  font-size: 1.4rem;
+}
+
+/* 🌀 Collapse Button - Cyberpunk Style */
+.collapse-btn {
+  position: absolute;
+  top: 25px;
+  right: -15px;
+  width: 30px;
+  height: 30px;
+  background: linear-gradient(135deg, var(--neon-pink), var(--neon-blue));
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 0 15px rgba(5, 217, 232, 0.5);
+  transition: all 0.3s ease;
+}
+
+.collapse-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255, 42, 109, 0.7);
+}
+
+.collapse-btn i {
+  color: white;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.sidebar.collapsed .collapse-btn i {
+  transform: rotate(180deg);
+}
+
+/* ✨ Status Indicator */
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-left: auto;
+  background: var(--neon-pink);
+  box-shadow: 0 0 10px var(--neon-pink);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.status-indicator.active {
+  opacity: 1;
+  background: var(--neon-blue);
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.sidebar-menu a:hover .status-indicator {
+  opacity: 0.7;
+}
+
+/* 🖥️ Main Content Adjustment */
+.main-content {
+  margin-left: 280px;
+  padding: 30px;
+  transition: margin-left 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.sidebar.collapsed + .main-content {
+  margin-left: 80px;
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
+    left: -280px;
+  }
+  
+  .sidebar.active {
+    left: 0;
+  }
+  
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .sidebar-toggle {
+    display: block;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1100;
+    background: linear-gradient(135deg, var(--neon-pink), var(--neon-blue));
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(5, 217, 232, 0.5);
+  }
+  
+ .collapse-btn {
+  position: absolute;
+  top: 20px;
+  right: -15px;
+  background: linear-gradient(135deg, #ff2a6d, #05d9e8);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition: right 0.3s ease;
+}
+
+.collapse-btn i {
+  font-size: 1.2em;
+}
+
+}
+
+/* 💾 Sidebar Footer */
+.sidebar-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  border-top: var(--sidebar-border);
+}
+
+.sidebar.collapsed .sidebar-footer {
+  display: none;
+}
+.sidebar-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  background: linear-gradient(90deg, #ff2a6d, #05d9e8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  text-align: center;
+  margin-bottom: 5px;
+}

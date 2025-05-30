@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login Page</title>
+        <link rel="stylesheet" href="login.css">
+
+        <script>
+            function toggleAbout() {
+                document.getElementById("about-text").classList.toggle("hidden");
+            }
+
+            function toggleLogin() {
+                const username = document.getElementById('username').value;
+                localStorage.setItem("username", username);
+                window.location.href = "fitness.html";
+            }
+		// Toggle sidebar collapse
+document.querySelector('.toggle-collapse').addEventListener('click', function() {
+    document.querySelector('.sidebar').classList.toggle('collapsed');
+    
+    // Rotate the chevron icon
+    const icon = this.querySelector('i');
+    if (document.querySelector('.sidebar').classList.contains('collapsed')) {
+        icon.classList.remove('fa-chevron-left');
+        icon.classList.add('fa-chevron-right');
+    } else {
+        icon.classList.remove('fa-chevron-right');
+        icon.classList.add('fa-chevron-left');
+    }
+});
+        </script>
+    </head>
+    <body>
+
+    <video autoplay muted loop id="bg-video">
+        <source src="cover.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- 🌟 About Us -->
+    <div class="about-section">
+        <button class="about-toggle" onclick="toggleAbout()">About Us ⌄</button>
+        <p id="about-text" class="hidden">Hello There! Welcome to our Fitness Tracker Website — your all-time Fitness Partner!!</p>
+    </div>
+
+    <!-- 💻 Login Box -->
+    <div class="login-box">
+        <h2>Login</h2>
+        <form>
+        <div class="input-box">
+        <span class="icon">📧</span>
+        <input type="text" id="username" required placeholder="Username" />
+        </div>
+        <div class="input-box">
+        <span class="icon">🔒</span>
+        <input type="password" required placeholder="Password" />
+        </div>
+        <div class="options">
+            <label><input type="checkbox"> Remember me</label>
+            <a href="#">Forgot Password?</a>
+        </div>
+        <button type="button" class="login-btn" onclick="toggleLogin()">Login</button>
+        <div class="register">
+            Don’t have an account? <a href="#">Register</a>
+        </div>
+        </form>
+    </div>
+    </body>
+</html>
