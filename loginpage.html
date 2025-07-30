@@ -1,6 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        <div class="register">
+            Don't have an account? <a href="register.html">Register</a>
+        </div>
+        </form> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Login Page</title>
         <link rel="stylesheet" href="login.css">
 
@@ -12,22 +17,14 @@
             function toggleLogin() {
                 const username = document.getElementById('username').value;
                 localStorage.setItem("username", username);
+                
+                // If no email exists in localStorage, set a default one
+                if (!localStorage.getItem("email")) {
+                    localStorage.setItem("email", `${username}@gmail.com`);
+                }
+                
                 window.location.href = "fitness.html";
             }
-		// Toggle sidebar collapse
-document.querySelector('.toggle-collapse').addEventListener('click', function() {
-    document.querySelector('.sidebar').classList.toggle('collapsed');
-    
-    // Rotate the chevron icon
-    const icon = this.querySelector('i');
-    if (document.querySelector('.sidebar').classList.contains('collapsed')) {
-        icon.classList.remove('fa-chevron-left');
-        icon.classList.add('fa-chevron-right');
-    } else {
-        icon.classList.remove('fa-chevron-right');
-        icon.classList.add('fa-chevron-left');
-    }
-});
         </script>
     </head>
     <body>

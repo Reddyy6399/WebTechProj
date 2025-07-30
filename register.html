@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Register Page</title>
+        <link rel="stylesheet" href="register.css">
+
+        <script>
+            function toggleAbout() {
+                document.getElementById("about-text").classList.toggle("hidden");
+            }
+
+            function handleRegister() {
+                const username = document.getElementById('username').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                
+                // Basic validation
+                if (!username || !email || !password || !confirmPassword) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match');
+                    return;
+                }
+                
+                // Save user data (in a real app, this would be sent to a server)
+                localStorage.setItem("username", username);
+                localStorage.setItem("email", email);
+                
+                alert('Registration successful! Redirecting to login...');
+                window.location.href = "loginpage.html";
+            }
+        </script>
+    </head>
+    <body>
+
+    <video autoplay muted loop id="bg-video">
+        <source src="cover.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- 🌟 About Us -->
+    <div class="about-section">
+        <button class="about-toggle" onclick="toggleAbout()">About Us ⌄</button>
+        <p id="about-text" class="hidden">Hello There! Welcome to our Fitness Tracker Website — your all-time Fitness Partner!! Create your account to get started.</p>
+    </div>
+
+    <!-- 💻 Register Box -->
+    <div class="register-box">
+        <h2>Register</h2>
+        <form>
+        <div class="input-box">
+        <span class="icon">👤</span>
+        <input type="text" id="username" required placeholder="Username" />
+        </div>
+        <div class="input-box">
+        <span class="icon">📧</span>
+        <input type="email" id="email" required placeholder="Email" />
+        </div>
+        <div class="input-box">
+        <span class="icon">🔒</span>
+        <input type="password" id="password" required placeholder="Password" />
+        </div>
+        <div class="input-box">
+        <span class="icon">🔐</span>
+        <input type="password" id="confirm-password" required placeholder="Confirm Password" />
+        </div>
+        <div class="options">
+            <label><input type="checkbox" required> I agree to the <a href="#">Terms & Conditions</a></label>
+        </div>
+        <button type="button" class="register-btn" onclick="handleRegister()">Register</button>
+        <div class="login-link">
+            Already have an account? <a href="loginpage.html">Login</a>
+        </div>
+        </form>
+    </div>
+    </body>
+</html>

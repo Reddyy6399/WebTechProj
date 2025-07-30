@@ -1,206 +1,10 @@
-<!--<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>User Profile</title>
-  <link rel="stylesheet" href="SideBar.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    body {
-      font-family: 'Rajdhani', sans-serif;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      background: 
-        linear-gradient(rgba(13, 2, 33, 0.8), rgba(13, 2, 33, 0.8)),
-        url('background1.jpg') center/cover no-repeat fixed;
-      color: #d1f7ff;
-      display: flex;
-    }
-    .main-content {
-      margin-left: 250px;
-      padding: 40px;
-      width: 100%;
-      box-sizing: border-box;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .profile-container {
-      background: rgba(26, 26, 46, 0.75);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(5, 217, 232, 0.3);
-      box-shadow: 0 0 25px rgba(5, 217, 232, 0.3);
-      padding: 40px;
-      border-radius: 15px;
-      max-width: 900px;
-      width: 100%;
-      color: #fff;
-    }
-    .profile-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 30px;
-    }
-    .profile-avatar {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #ff2a6d, #05d9e8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      color: white;
-      margin-right: 20px;
-      box-shadow: 0 0 30px rgba(5, 217, 232, 0.6);
-    }
-    .profile-info h2 {
-      margin: 0;
-      color: #d1f7ff;
-    }
-    .profile-info p {
-      color: #aecde0;
-      margin-top: 5px;
-    }
-    .profile-section h3 {
-      color: #05d9e8;
-      border-bottom: 2px solid #eee;
-      padding-bottom: 10px;
-      margin-bottom: 15px;
-    }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-    }
-    .stat-card {
-      background: rgba(13, 2, 33, 0.7);
-      border: 1px solid rgba(255, 42, 109, 0.3);
-      box-shadow: 0 0 12px rgba(255, 42, 109, 0.1);
-      border-radius: 8px;
-      padding: 15px;
-      text-align: center;
-    }
-    .stat-value {
-      font-size: 2rem;
-      font-weight: bold;
-      color: #05d9e8;
-    }
-    .stat-label {
-      color: #ccc;
-      font-size: 0.9rem;
-    }
-  </style>
-</head>
-<body>-->
-
-<!-- ✅ Sidebar -->
-<!--<nav class="sidebar">
-  <div class="collapse-btn">
-    <i class="fas fa-chevron-left"></i>
-  </div>
-  <div class="sidebar-title">
-            <div class="sidebar-title">Fitness Tracker</div>
-        </div>
-  <ul class="sidebar-menu">
-    <li><a href="fitness.html"><i class="fas fa-dumbbell"></i> <span>Workouts</span></a></li>
-    <li><a href="routine.html"><i class="fas fa-list-check"></i> <span>My Routine</span></a></li>
-    <li><a href="progress.html"><i class="fas fa-chart-line"></i> <span>Progress</span></a></li>
-    <li><a href="profile.html" class="active"><i class="fas fa-user"></i> <span>Profile</span></a></li>
-    <li><a href="loginpage.html"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
-  </ul>
-</nav>
-<button class="sidebar-toggle">
-  <i class="fas fa-bars"></i>
-</button>-->
-
-<!-- ✅ Main Content -->
-<!--<div class="main-content">
-  <div class="profile-container">
-    <div class="profile-header">
-      <div class="profile-avatar" id="avatar-initial">U</div>
-      <div class="profile-info">
-        <h2 id="username-display">Username</h2>
-        <p>Fitness Enthusiast</p>
-      </div>
-    </div>
-    <div class="profile-section">
-      <h3>Weekly Stats</h3>
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-value">5</div>
-          <div class="stat-label">Workouts Completed</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">3</div>
-          <div class="stat-label">Active Days</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">700</div>
-          <div class="stat-label">Calories Burned</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>-->
-
-<!-- ✅ Sidebar Script -->
-<!--<script>
-window.onload = () => {
-  const username = localStorage.getItem("username");
-  if (username) {
-    document.getElementById('username-display').textContent = username;
-    document.getElementById('avatar-initial').textContent = username.charAt(0).toUpperCase();
-  }
-
-  const welcomeElement = document.querySelector('.sidebar-welcome');
-  if (username && welcomeElement) {
-    welcomeElement.textContent = `Hi, ${username}`;
-  }
-
-  const sidebar = document.querySelector('.sidebar');
-  const collapseBtn = document.querySelector('.collapse-btn');
-  const collapseIcon = collapseBtn.querySelector('i');
-
-  const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
-  if (isCollapsed) {
-    sidebar.classList.add('collapsed');
-    collapseIcon.classList.remove('fa-chevron-left');
-    collapseIcon.classList.add('fa-chevron-right');
-  }
-
-  collapseBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('collapsed');
-    collapseIcon.classList.toggle('fa-chevron-left');
-    collapseIcon.classList.toggle('fa-chevron-right');
-    localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
-  });
-
-  const toggleBtn = document.querySelector('.sidebar-toggle');
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', () => {
-      sidebar.classList.toggle('active');
-    });
-  }
-
-  document.querySelectorAll('.sidebar-menu a').forEach(link => {
-    if (link.href === window.location.href || window.location.href.includes(link.getAttribute('href'))) {
-      link.classList.add('active');
-    }
-  });
-};
-</script>
-
-</body>
-</html>-->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fitness Tracker - Profile</title>
+    <link rel="stylesheet" href="SideBar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
@@ -292,7 +96,6 @@ window.onload = () => {
             text-transform: uppercase;
             text-align: center;
             margin-bottom: 5px;
-            padding: 0 20px;
         }
         
         .sidebar-menu {
@@ -822,8 +625,10 @@ window.onload = () => {
             });
             
             function loadSavedInfo() {
-                const fullName = localStorage.getItem('profile-fullName') || 'John Doe';
-                const email = localStorage.getItem('profile-email') || 'john.doe@example.com';
+                const fullName = localStorage.getItem('profile-fullName') || username;
+                // Check if user registered and has an email, otherwise use profile-email or fallback
+                const registeredEmail = localStorage.getItem('email');
+                const email = localStorage.getItem('profile-email') || registeredEmail || `${username}@gmail.com`;
                 const age = localStorage.getItem('profile-age') || '28';
                 const height = localStorage.getItem('profile-height') || '175';
                 const weight = localStorage.getItem('profile-weight') || '75';

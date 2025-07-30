@@ -109,3 +109,133 @@
 .calendar-grid {
   transform: none !important;
 }
+/* calendar.css */
+.calendar-container {
+  background: rgba(13, 2, 33, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(5, 217, 232, 0.3);
+  border-radius: 15px;
+  padding: 25px;
+  margin: 20px auto;
+  max-width: 900px;
+  box-shadow: 0 10px 30px rgba(5, 217, 232, 0.1);
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.calendar-container:hover {
+  box-shadow: 0 15px 40px rgba(255, 42, 109, 0.3);
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.calendar-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  color: #05d9e8;
+  margin: 0;
+}
+
+.calendar-nav {
+  display: flex;
+  gap: 15px;
+}
+
+.calendar-nav button {
+  background: rgba(5, 217, 232, 0.2);
+  color: #05d9e8;
+  border: 1px solid #05d9e8;
+  padding: 8px 15px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.calendar-nav button:hover {
+  background: rgba(255, 42, 109, 0.2);
+  color: #ff2a6d;
+  border-color: #ff2a6d;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  background: rgba(13, 2, 33, 0.95);
+  background-image: 
+    linear-gradient(45deg, rgba(255, 42, 109, 0.15) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255, 42, 109, 0.15) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(255, 42, 109, 0.15) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(255, 42, 109, 0.15) 75%);
+  background-size: 30px 30px;
+  border-radius: 15px;
+  border: 1px solid rgba(5, 217, 232, 0.35);
+  box-shadow: 0 0 30px rgba(255, 42, 109, 0.25);
+}
+
+.calendar-day-header {
+  text-align: center;
+  font-weight: bold;
+  padding: 15px 0;
+  color: #ff2a6d;
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.calendar-day {
+  background: rgba(26, 26, 46, 0.65);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 42, 109, 0.25);
+  border-radius: 10px;
+  padding: 10px;
+  min-height: 80px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.calendar-day:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 15px rgba(5, 217, 232, 0.5);
+  border-color: #05d9e8;
+}
+
+.calendar-day.empty {
+  background-color: transparent;
+}
+
+.calendar-day-number {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.calendar-day.today {
+  background-color: rgba(227, 242, 253, 0.85);
+  border: 1px solid #3498db;
+}
+
+.calendar-workout {
+  background-color: #3498db;
+  color: white;
+  font-size: 0.8rem;
+  padding: 2px 5px;
+  border-radius: 3px;
+  margin-top: 5px;
+  display: block;
+}
+
+.calendar-workout.completed {
+  background-color: #2ecc71;
+}
+
+.calendar-workout.missed {
+  background-color: #e74c3c;
+}
